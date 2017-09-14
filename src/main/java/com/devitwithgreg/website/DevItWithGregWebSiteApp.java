@@ -2,16 +2,15 @@ package com.devitwithgreg.website;
 
 import com.devitwithgreg.website.config.ApplicationProperties;
 import com.devitwithgreg.website.config.DefaultProfileUtil;
-
+import com.devitwithgreg.website.config.exetrnalService.ExternalServiceConfiguration;
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.*;
+import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.hazelcast.HazelcastAutoConfiguration;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -31,9 +30,7 @@ public class DevItWithGregWebSiteApp {
 
     private final Environment env;
 
-    public DevItWithGregWebSiteApp(Environment env) {
-        this.env = env;
-    }
+    public DevItWithGregWebSiteApp(Environment env ) { this.env = env; }
 
     /**
      * Initializes DevItWithGregWebSite.
@@ -53,6 +50,7 @@ public class DevItWithGregWebSiteApp {
             log.error("You have misconfigured your application! It should not " +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+
     }
 
     /**

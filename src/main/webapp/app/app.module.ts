@@ -3,6 +3,7 @@ import './vendor.ts';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2Webstorage } from 'ng2-webstorage';
+import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
 
 import { DevItWithGregWebSiteSharedModule, UserRouteAccessService } from './shared';
 import { DevItWithGregWebSiteHomeModule } from './home/home.module';
@@ -12,6 +13,8 @@ import { DevItWithGregWebSiteEntityModule } from './entities/entity.module';
 
 import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+
+import {YoutubeService} from './shared/youtube/youtube.service';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 
@@ -36,6 +39,7 @@ import {
         DevItWithGregWebSiteAdminModule,
         DevItWithGregWebSiteAccountModule,
         DevItWithGregWebSiteEntityModule,
+        SlimLoadingBarModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -50,7 +54,8 @@ import {
         ProfileService,
         customHttpProvider(),
         PaginationConfig,
-        UserRouteAccessService
+        UserRouteAccessService,
+        YoutubeService,
     ],
     bootstrap: [ JhiMainComponent ]
 })

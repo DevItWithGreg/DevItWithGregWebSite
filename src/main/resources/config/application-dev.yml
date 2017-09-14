@@ -109,6 +109,15 @@ jhipster:
             port: 5000
             queue-size: 512
 
+external-service:
+    google:
+        key: xxxxxxxxxxxxxxx
+        channel: UCcziTK2NKeWtWQ6kB5tmQ8Q
+    facebook:
+        key: aaaaaaaaaaa
+    tweeter:
+        key: aaaaaaaaaaa
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
@@ -119,3 +128,4 @@ jhipster:
 # ===================================================================
 
 application:
+

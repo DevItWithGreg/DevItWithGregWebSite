@@ -14,6 +14,7 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.support.OAuth2Connection;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -85,7 +86,7 @@ public class SocialService {
 
     public void deleteUserSocialConnection(String login) {
         ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(login);
-        connectionRepository.findAllConnections().keySet().stream()
+        connectionRepository.findAllConnections().keySet()
             .forEach(providerId -> {
                 connectionRepository.removeConnections(providerId);
                 log.debug("Delete user social connection providerId: {}", providerId);
@@ -163,4 +164,5 @@ public class SocialService {
         ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(login);
         connectionRepository.addConnection(connection);
     }
+    
 }

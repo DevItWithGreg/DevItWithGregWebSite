@@ -10,6 +10,24 @@ Main page styles
     background-size: contain;
 }
 
+.card-header .header-as-link{
+    color: #0088bb;
+}
+
+.card-header .header-as-link:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cardOverlay{
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.cardOverlay .card-text{
+    color: #ffffff;
+    font-weight: bold;
+}
+
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media
 only screen and (-webkit-min-device-pixel-ratio: 2),

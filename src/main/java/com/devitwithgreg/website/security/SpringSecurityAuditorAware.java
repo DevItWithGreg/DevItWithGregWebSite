@@ -1,7 +1,6 @@
 package com.devitwithgreg.website.security;
 
 import com.devitwithgreg.website.config.Constants;
-
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

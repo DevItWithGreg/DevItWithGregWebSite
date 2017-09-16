@@ -1,19 +1,18 @@
 package com.devitwithgreg.website.web.rest;
 
-import com.devitwithgreg.website.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.devitwithgreg.website.config.Constants;
 import com.devitwithgreg.website.domain.User;
 import com.devitwithgreg.website.repository.UserRepository;
 import com.devitwithgreg.website.security.AuthoritiesConstants;
 import com.devitwithgreg.website.service.MailService;
 import com.devitwithgreg.website.service.UserService;
 import com.devitwithgreg.website.service.dto.UserDTO;
-import com.devitwithgreg.website.web.rest.vm.ManagedUserVM;
 import com.devitwithgreg.website.web.rest.util.HeaderUtil;
 import com.devitwithgreg.website.web.rest.util.PaginationUtil;
+import com.devitwithgreg.website.web.rest.vm.ManagedUserVM;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,7 +26,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing users.
@@ -68,7 +68,7 @@ public class UserResource {
     private final UserService userService;
 
     public UserResource(UserRepository userRepository, MailService mailService,
-            UserService userService) {
+                        UserService userService) {
 
         this.userRepository = userRepository;
         this.mailService = mailService;
@@ -96,7 +96,7 @@ public class UserResource {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new user cannot already have an ID"))
                 .body(null);
-        // Lowercase the user login before comparing with database
+            // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use"))
@@ -109,7 +109,7 @@ public class UserResource {
             User newUser = userService.createUser(managedUserVM);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
+                .headers(HeaderUtil.createAlert("userManagement.created", newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -192,6 +192,6 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "userManagement.deleted", login)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert("userManagement.deleted", login)).build();
     }
 }

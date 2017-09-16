@@ -2,7 +2,7 @@ package com.devitwithgreg.website;
 
 import com.devitwithgreg.website.config.ApplicationProperties;
 import com.devitwithgreg.website.config.DefaultProfileUtil;
-import com.devitwithgreg.website.config.exetrnalService.ExternalServiceConfiguration;
+import com.devitwithgreg.website.service.cache.YouTubeCacheService;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class, HazelcastAutoConfiguration.class})
@@ -30,7 +33,12 @@ public class DevItWithGregWebSiteApp {
 
     private final Environment env;
 
-    public DevItWithGregWebSiteApp(Environment env ) { this.env = env; }
+    private YouTubeCacheService youTubeCacheService;
+
+    public DevItWithGregWebSiteApp(Environment env, YouTubeCacheService youTubeCacheService) {
+        this.env = env;
+        this.youTubeCacheService = youTubeCacheService;
+    }
 
     /**
      * Initializes DevItWithGregWebSite.
@@ -51,6 +59,8 @@ public class DevItWithGregWebSiteApp {
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
 
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleWithFixedDelay(youTubeCacheService.getYouTubeChannelUpdater(), 0, 1, TimeUnit.MINUTES);
     }
 
     /**

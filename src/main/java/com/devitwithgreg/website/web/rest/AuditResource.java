@@ -2,7 +2,6 @@ package com.devitwithgreg.website.web.rest;
 
 import com.devitwithgreg.website.service.AuditEventService;
 import com.devitwithgreg.website.web.rest.util.PaginationUtil;
-
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.springframework.boot.actuate.audit.AuditEvent;
@@ -47,7 +46,7 @@ public class AuditResource {
      * GET  /audits : get a page of AuditEvents between the fromDate and toDate.
      *
      * @param fromDate the start of the time period of AuditEvents to get
-     * @param toDate the end of the time period of AuditEvents to get
+     * @param toDate   the end of the time period of AuditEvents to get
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of AuditEvents in body
      */

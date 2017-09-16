@@ -1,14 +1,13 @@
 package com.devitwithgreg.website.service.dto;
 
 import com.devitwithgreg.website.config.Constants;
-
 import com.devitwithgreg.website.domain.Authority;
 import com.devitwithgreg.website.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -66,9 +65,9 @@ public class UserDTO {
     }
 
     public UserDTO(String id, String login, String firstName, String lastName,
-        String email, boolean activated, String imageUrl, String langKey,
-        String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
-        Set<String> authorities) {
+                   String email, boolean activated, String imageUrl, String langKey,
+                   String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
+                   Set<String> authorities) {
 
         this.id = id;
         this.login = login;

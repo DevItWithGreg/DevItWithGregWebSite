@@ -17,7 +17,7 @@ public class YouTubePlaylistDTO {
     }
 
     @JsonIgnore
-    public void addVideo(YouTubeVideoDTO youTubeVideoDTO){
+    public void addVideo(YouTubeVideoDTO youTubeVideoDTO) {
         this.videos.add(youTubeVideoDTO);
     }
 

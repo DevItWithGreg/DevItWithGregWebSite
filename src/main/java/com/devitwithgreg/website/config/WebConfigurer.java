@@ -1,22 +1,22 @@
 package com.devitwithgreg.website.config;
 
-import io.github.jhipster.config.JHipsterConstants;
-import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.web.filter.CachingHttpHeadersFilter;
-
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.web.SessionListener;
 import com.hazelcast.web.spring.SpringAwareWebFilter;
-
+import io.github.jhipster.config.JHipsterConstants;
+import io.github.jhipster.config.JHipsterProperties;
+import io.github.jhipster.web.filter.CachingHttpHeadersFilter;
+import io.undertow.UndertowOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.*;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.MimeMappings;
 import org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory;
-import io.undertow.UndertowOptions;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,10 +25,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import javax.servlet.*;
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.*;
-import javax.servlet.*;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Configuration of web application with Servlet 3.0 APIs.
@@ -149,14 +151,14 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     }
 
     /**
-     *  Resolve path prefix to static resources.
+     * Resolve path prefix to static resources.
      */
     private String resolvePathPrefix() {
         String fullExecutablePath = this.getClass().getResource("").getPath();
         String rootPath = Paths.get(".").toUri().normalize().getPath();
         String extractedPath = fullExecutablePath.replace(rootPath, "");
         int extractionEndIndex = extractedPath.indexOf("build/");
-        if(extractionEndIndex <= 0) {
+        if (extractionEndIndex <= 0) {
             return "";
         }
         return extractedPath.substring(0, extractionEndIndex);

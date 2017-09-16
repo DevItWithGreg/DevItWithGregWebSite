@@ -1,8 +1,7 @@
 package com.devitwithgreg.website.domain.google.api.responce;
 
-import com.devitwithgreg.website.domain.google.api.shred.PageInfo;
 import com.devitwithgreg.website.domain.google.api.shred.Item;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.devitwithgreg.website.domain.google.api.shred.PageInfo;
 
 import java.util.List;
 

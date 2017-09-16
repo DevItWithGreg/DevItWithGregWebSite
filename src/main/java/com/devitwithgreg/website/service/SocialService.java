@@ -4,7 +4,6 @@ import com.devitwithgreg.website.domain.Authority;
 import com.devitwithgreg.website.domain.User;
 import com.devitwithgreg.website.repository.AuthorityRepository;
 import com.devitwithgreg.website.repository.UserRepository;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.support.OAuth2Connection;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -72,10 +70,9 @@ public class SocialService {
     }
 
 
-
     public SocialService(UsersConnectionRepository usersConnectionRepository, AuthorityRepository authorityRepository,
-            PasswordEncoder passwordEncoder, UserRepository userRepository,
-            MailService mailService) {
+                         PasswordEncoder passwordEncoder, UserRepository userRepository,
+                         MailService mailService) {
 
         this.usersConnectionRepository = usersConnectionRepository;
         this.authorityRepository = authorityRepository;
@@ -149,7 +146,7 @@ public class SocialService {
 
     /**
      * @return login if provider manage a login like Twitter or GitHub otherwise email address.
-     *         Because provider like Google or Facebook didn't provide login or login like "12099388847393"
+     * Because provider like Google or Facebook didn't provide login or login like "12099388847393"
      */
     private String getLoginDependingOnProviderId(UserProfile userProfile, String providerId) {
         switch (providerId) {
@@ -164,5 +161,5 @@ public class SocialService {
         ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(login);
         connectionRepository.addConnection(connection);
     }
-    
+
 }

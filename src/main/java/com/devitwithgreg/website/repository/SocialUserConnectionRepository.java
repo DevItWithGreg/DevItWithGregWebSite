@@ -1,8 +1,8 @@
 package com.devitwithgreg.website.repository;
 
 import com.devitwithgreg.website.domain.SocialUserConnection;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
+
 import java.util.List;
 import java.util.Set;
 

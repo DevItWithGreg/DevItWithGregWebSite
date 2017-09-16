@@ -1,7 +1,6 @@
 package com.devitwithgreg.website.config;
 
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

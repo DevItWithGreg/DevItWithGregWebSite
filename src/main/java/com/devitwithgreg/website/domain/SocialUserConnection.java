@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -69,7 +70,9 @@ public class SocialUserConnection implements Serializable {
     @Field("expire_time")
     private Long expireTime;
 
-    public SocialUserConnection() {}
+    public SocialUserConnection() {
+    }
+
     public SocialUserConnection(String userId,
                                 String providerId,
                                 String providerUserId,

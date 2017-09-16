@@ -3,14 +3,11 @@ package com.devitwithgreg.website.config.dbmigrations;
 import com.devitwithgreg.website.domain.Authority;
 import com.devitwithgreg.website.domain.User;
 import com.devitwithgreg.website.security.AuthoritiesConstants;
-
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Creates the initial database setup

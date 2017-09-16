@@ -1,10 +1,9 @@
 package com.devitwithgreg.website.config;
 
-import com.devitwithgreg.website.security.*;
-import com.devitwithgreg.website.security.jwt.*;
-
-import io.github.jhipster.security.*;
-
+import com.devitwithgreg.website.security.AuthoritiesConstants;
+import com.devitwithgreg.website.security.jwt.JWTConfigurer;
+import com.devitwithgreg.website.security.jwt.TokenProvider;
+import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,8 +41,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
 
     public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService,
-            TokenProvider tokenProvider, SessionRegistry sessionRegistry,
-        CorsFilter corsFilter) {
+                                 TokenProvider tokenProvider, SessionRegistry sessionRegistry,
+                                 CorsFilter corsFilter) {
 
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
@@ -57,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         try {
             authenticationManagerBuilder
                 .userDetailsService(userDetailsService)
-                    .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
         }
@@ -94,16 +93,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(http401UnauthorizedEntryPoint())
-        .and()
+            .and()
             .csrf()
             .disable()
             .headers()
             .frameOptions()
             .disable()
-        .and()
+            .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
+            .and()
             .authorizeRequests()
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
@@ -117,7 +116,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/v2/api-docs/**").permitAll()
             .antMatchers("/swagger-resources/configuration/ui").permitAll()
             .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
-        .and()
+            .and()
             .apply(securityConfigurerAdapter());
 
     }

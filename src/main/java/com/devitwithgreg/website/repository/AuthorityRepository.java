@@ -1,7 +1,6 @@
 package com.devitwithgreg.website.repository;
 
 import com.devitwithgreg.website.domain.Authority;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

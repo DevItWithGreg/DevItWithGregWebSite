@@ -1,23 +1,21 @@
 package com.devitwithgreg.website.config;
 
+import com.hazelcast.config.Config;
+import com.hazelcast.config.EvictionPolicy;
+import com.hazelcast.config.MapConfig;
+import com.hazelcast.config.MaxSizeConfig;
+import com.hazelcast.core.Hazelcast;
+import com.hazelcast.core.HazelcastInstance;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
-
-import com.hazelcast.config.Config;
-import com.hazelcast.core.HazelcastInstance;
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.config.MapConfig;
-import com.hazelcast.config.EvictionPolicy;
-import com.hazelcast.config.MaxSizeConfig;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -26,8 +24,8 @@ import javax.annotation.PreDestroy;
 
 @Configuration
 @EnableCaching
-@AutoConfigureAfter(value = { MetricsConfiguration.class })
-@AutoConfigureBefore(value = { WebConfigurer.class, DatabaseConfiguration.class })
+@AutoConfigureAfter(value = {MetricsConfiguration.class})
+@AutoConfigureBefore(value = {WebConfigurer.class, DatabaseConfiguration.class})
 public class CacheConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);

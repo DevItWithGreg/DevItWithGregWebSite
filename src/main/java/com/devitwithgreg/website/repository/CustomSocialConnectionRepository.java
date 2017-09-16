@@ -1,7 +1,6 @@
 package com.devitwithgreg.website.repository;
 
 import com.devitwithgreg.website.domain.SocialUserConnection;
-
 import org.springframework.social.connect.*;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -118,7 +117,7 @@ public class CustomSocialConnectionRepository implements ConnectionRepository {
     public void updateConnection(Connection<?> connection) {
         SocialUserConnection socialUserConnection = socialUserConnectionRepository.findOneByUserIdAndProviderIdAndProviderUserId(userId, connection.getKey().getProviderId(), connection.getKey().getProviderUserId());
         if (socialUserConnection != null) {
-            SocialUserConnection socialUserConnectionToUdpate =  connectionToUserSocialConnection(connection, socialUserConnection.getRank());
+            SocialUserConnection socialUserConnectionToUdpate = connectionToUserSocialConnection(connection, socialUserConnection.getRank());
             socialUserConnectionToUdpate.setId(socialUserConnection.getId());
             socialUserConnectionRepository.save(socialUserConnectionToUdpate);
         }

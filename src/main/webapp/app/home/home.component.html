@@ -7,6 +7,9 @@
         <p class="lead" jhiTranslate="home.subtitle">if the english is not your language change it from language
             menu</p>
         <h2> Playlists </h2>
+
+        <img src="../../content/images/Spinner.svg" *ngIf="!playlist" class="spinner">
+
         <div *ngFor="let list of playlist; let i = index">
             <div id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="card">

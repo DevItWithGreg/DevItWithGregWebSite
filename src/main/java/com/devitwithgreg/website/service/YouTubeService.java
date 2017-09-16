@@ -9,12 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.List;
 
 @Service
 public class YouTubeService {
@@ -26,10 +21,14 @@ public class YouTubeService {
         this.externalServiceProperties = externalServiceProperties;
     }
 
-    public List<YouTubePlaylistDTO> getPlaylist() throws IOException, KeyStoreException, NoSuchAlgorithmException, KeyManagementException, URISyntaxException {
+    public List<YouTubePlaylistDTO> getPlaylist(String channelId) {
         GoogleProperties googleProperties = this.externalServiceProperties.getGoogle();
-        YouTubeItemResponse response = YouTubeHelper.getPlayLists(googleProperties.getChannel(),googleProperties.getKey());
-        return YouTubeHelper.convertYouTubeResponseToDto(response,googleProperties.getKey());
+        YouTubeItemResponse response = YouTubeHelper.getPlayLists(channelId, googleProperties.getKey());
+        return YouTubeHelper.convertYouTubeResponseToDto(response, googleProperties.getKey());
+    }
+
+    public GoogleProperties getGoogleProperties() {
+        return this.externalServiceProperties.getGoogle();
     }
 
 

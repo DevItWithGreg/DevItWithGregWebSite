@@ -5,6 +5,7 @@ import com.devitwithgreg.website.repository.YouTubeChannelRepository;
 import com.devitwithgreg.website.runnable.YouTubeChannelUpdater;
 import com.devitwithgreg.website.service.YouTubeService;
 import com.devitwithgreg.website.service.dto.YouTubePlaylistDTO;
+import com.hazelcast.core.HazelcastInstance;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class YouTubeCacheService {
     private YouTubeChannelRepository youTubeChannelRepository;
     private YouTubeService youTubeService;
 
-    public YouTubeCacheService(YouTubeChannelRepository youTubeChannelRepository, YouTubeService youTubeService) {
+    public YouTubeCacheService(YouTubeChannelRepository youTubeChannelRepository, YouTubeService youTubeService, HazelcastInstance hazelcastInstance) {
         this.youTubeService = youTubeService;
         this.youTubeChannelRepository = youTubeChannelRepository;
         this.youTubeChannelUpdater = new YouTubeChannelUpdater(youTubeService, youTubeChannelRepository);

@@ -1,4 +1,4 @@
-package com.devitwithgreg.website.config.exetrnalService.properties;
+package com.devitwithgreg.website.config.exetrnalService;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.context.properties.ConfigurationProperties;

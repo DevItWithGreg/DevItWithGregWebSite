@@ -1,7 +1,7 @@
 package com.devitwithgreg.website.service;
 
-import com.devitwithgreg.website.config.exetrnalService.properties.ExternalServiceProperties;
-import com.devitwithgreg.website.config.exetrnalService.properties.GoogleProperties;
+import com.devitwithgreg.website.config.exetrnalService.ExternalServiceProperties;
+import com.devitwithgreg.website.config.exetrnalService.GoogleProperties;
 import com.devitwithgreg.website.domain.google.api.responce.YouTubeItemResponse;
 import com.devitwithgreg.website.helper.YouTubeHelper;
 import com.devitwithgreg.website.service.dto.YouTubePlaylistDTO;

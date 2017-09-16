@@ -1,6 +1,6 @@
 package com.devitwithgreg.website.runnable;
 
-import com.devitwithgreg.website.config.exetrnalService.properties.GoogleProperties;
+import com.devitwithgreg.website.config.exetrnalService.GoogleProperties;
 import com.devitwithgreg.website.domain.YouTubeChannel;
 import com.devitwithgreg.website.repository.YouTubeChannelRepository;
 import com.devitwithgreg.website.service.YouTubeService;

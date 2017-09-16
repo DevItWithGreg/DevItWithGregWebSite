@@ -2,7 +2,10 @@ package com.devitwithgreg.website;
 
 import com.devitwithgreg.website.config.ApplicationProperties;
 import com.devitwithgreg.website.config.DefaultProfileUtil;
+import com.devitwithgreg.website.config.serviceExecutor.ServiceExecutorProperties;
 import com.devitwithgreg.website.service.cache.YouTubeCacheService;
+import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.scheduledexecutor.IScheduledExecutorService;
 import io.github.jhipster.config.JHipsterConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +23,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 @ComponentScan
@@ -35,9 +36,16 @@ public class DevItWithGregWebSiteApp {
 
     private YouTubeCacheService youTubeCacheService;
 
-    public DevItWithGregWebSiteApp(Environment env, YouTubeCacheService youTubeCacheService) {
+    private HazelcastInstance hazelcastInstance;
+
+    private ServiceExecutorProperties serviceExecutorProperties;
+
+
+    public DevItWithGregWebSiteApp(Environment env, YouTubeCacheService youTubeCacheService, HazelcastInstance hazelcastInstance, ServiceExecutorProperties serviceExecutorProperties) {
         this.env = env;
         this.youTubeCacheService = youTubeCacheService;
+        this.hazelcastInstance = hazelcastInstance;
+        this.serviceExecutorProperties = serviceExecutorProperties;
     }
 
     /**
@@ -59,8 +67,8 @@ public class DevItWithGregWebSiteApp {
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleWithFixedDelay(youTubeCacheService.getYouTubeChannelUpdater(), 0, 1, TimeUnit.MINUTES);
+        IScheduledExecutorService executorService = hazelcastInstance.getScheduledExecutorService(this.serviceExecutorProperties.getServiceExecutorName());
+        executorService.scheduleOnMemberAtFixedRate(youTubeCacheService.getYouTubeChannelUpdater(), hazelcastInstance.getCluster().getLocalMember(), 0, this.serviceExecutorProperties.getExecutionDelay(), TimeUnit.MINUTES);
     }
 
     /**

@@ -1,14 +1,16 @@
-package com.devitwithgreg.website.config.exetrnalService.properties;
+package com.devitwithgreg.website.config.exetrnalService;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
+@ConfigurationProperties(prefix = "external-service.google")
 @Configurable
-@ConfigurationProperties(prefix = "external-service.tweeter")
-public class TweeterProperties {
+@Component
+public class GoogleProperties {
+
     private String key;
+    private String channel;
 
     public String getKey() {
         return key;
@@ -16,5 +18,13 @@ public class TweeterProperties {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
     }
 }
